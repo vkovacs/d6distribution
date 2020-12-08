@@ -6,33 +6,37 @@ import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.canvas.GraphicsContext
 import javafx.scene.paint.Color
+import javafx.stage.Screen
 import javafx.stage.Stage
 import java.text.DecimalFormat
 import java.util.concurrent.ThreadLocalRandom
 
 
 class Main : Application() {
-    private val columnLineWidth = 50.0
+    val width = 1920
+    val height = 1080
+
+    val columnLineWidth = 50.0
     private val textLineWidth = 1.0
 
     override fun start(primaryStage: Stage) {
-
         primaryStage.title = "Drawing Operations Test"
         primaryStage.isMaximized = true
-        val root = Group()
-        val canvas = Canvas(2000.0, 1000.0)
-        val gc: GraphicsContext = canvas.graphicsContext2D
-        drawDistribution(gc)
-        root.children.add(canvas)
-        primaryStage.scene = Scene(root)
+
+
+        val canvas = Canvas(Screen.getPrimary().bounds.width, Screen.getPrimary().bounds.height)
+        drawDistributionOnCanvas(canvas.graphicsContext2D)
+        val rootGroup = Group()
+        rootGroup.children.add(canvas)
+        primaryStage.scene = Scene(rootGroup)
         primaryStage.show()
     }
 
-    private fun drawDistribution(gc: GraphicsContext) {
+    private fun drawDistributionOnCanvas(gc: GraphicsContext) {
         gc.lineWidth = columnLineWidth
 
-        var x = 400.0 + gc.lineWidth
-        val y = 800.0
+        var x = width / 5.0 + gc.lineWidth
+        val y = (height / 3.0) * 2
         val dec = DecimalFormat()
         for (distribution in distribution()) {
 

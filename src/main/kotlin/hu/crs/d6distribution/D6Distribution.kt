@@ -2,9 +2,7 @@
 
 package hu.crs.d6distribution
 
-import javafx.scene.paint.Color
 import java.util.*
-import java.util.concurrent.ThreadLocalRandom
 
 fun distribution() : SortedMap<Int, Int> {
     val distribution = mutableMapOf<Int, Int>()
