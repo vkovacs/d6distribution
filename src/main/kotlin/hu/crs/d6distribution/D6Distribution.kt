@@ -2,7 +2,9 @@
 
 package hu.crs.d6distribution
 
-fun main() {
+import java.util.*
+
+fun distribution() : SortedMap<Int, Int> {
     val distribution = mutableMapOf<Int, Int>()
 
     for (i in 1..1000000) {
@@ -19,5 +21,5 @@ fun main() {
         distribution[sum_d6_2_3] = (distribution[sum_d6_2_3] ?: 0) + 1
     }
 
-    println(distribution.toSortedMap())
+    return distribution.toSortedMap()
 }
