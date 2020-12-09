@@ -13,16 +13,16 @@ import java.util.concurrent.ThreadLocalRandom
 
 
 class Main : Application() {
-    val width = 1920
-    val height = 1080
+    private val width = 1920
+    private val height = 1080
 
-    val columnLineWidth = 50.0
     private val textLineWidth = 1.0
+    private val yScale = 1000
+    private val xScale = 50.0
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = "Drawing Operations Test"
         primaryStage.isMaximized = true
-
 
         val canvas = Canvas(Screen.getPrimary().bounds.width, Screen.getPrimary().bounds.height)
         drawDistributionOnCanvas(canvas.graphicsContext2D)
@@ -33,7 +33,7 @@ class Main : Application() {
     }
 
     private fun drawDistributionOnCanvas(gc: GraphicsContext) {
-        gc.lineWidth = columnLineWidth
+        gc.lineWidth = xScale
 
         var x = width / 5.0 + gc.lineWidth
         val y = (height / 3.0) * 2
@@ -41,12 +41,12 @@ class Main : Application() {
         for (distribution in distribution()) {
 
             gc.stroke = randomColor()
-            gc.strokeLine(x, y, x, y - distribution.value / 1000)
+            gc.strokeLine(x, y, x, y - distribution.value / yScale)
             gc.lineWidth = textLineWidth
-            gc.strokeText(distribution.key.toString(), x - 10, y + 100)
-            gc.strokeText("# " + dec.format(distribution.value), x - 10, y + 200)
-            gc.lineWidth = columnLineWidth
-            x += 100
+            gc.strokeText(distribution.key.toString(), x - width / 1000.0, y + height / 10.0)
+            gc.strokeText("# " + dec.format(distribution.value), x - width / 1000.0, y + height / 5.0)
+            gc.lineWidth = xScale
+            x += width / 20.0
         }
     }
 
