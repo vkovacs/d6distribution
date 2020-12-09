@@ -4,10 +4,10 @@ package hu.crs.d6distribution
 
 import java.util.*
 
-fun distribution() : SortedMap<Int, Int> {
+fun distribution(throwCount : Int) : SortedMap<Int, Int> {
     val distribution = mutableMapOf<Int, Int>()
 
-    for (i in 1..1000000) {
+    for (i in 1..throwCount) {
         val d6_1 = (1..6).random()
         val d6_2 = (1..6).random()
         val d6_3 = (1..6).random()
